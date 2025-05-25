@@ -19,11 +19,28 @@ Under the "Software" section in cPanel, click **Setup Python App**.
 - **Python version**: Select 3.9+ (e.g., 3.9 or 3.11 if available)
 - **Application root**: `public_html/flask-example`
 - **Application URL**: `flask-example` (or your desired path)
-- **Application startup file**: `passenger_wsgi.py`
-- **Application Entry point**: `application` The Object to be called which we define in `passenger_wsgi.py`
+- **Application startup file**: `app.py`
+- **Application Entry point**: `app` The Python Object to be called, defined in `app.py`
 - **Passenger log file**: `public_html/flask-example/passenger.log` The path of the logfile for passenger
 - Click **Create**
 
+
+#### Warning:
+
+- For some reason when creating the app and specifying the application startup file, even if the file exists and has contents it seems to get overwritten with:
+```
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+def app(environ, start_response):
+    start_response('200 OK', [('Content-Type', 'text/plain')])
+    message = 'It works!\n'
+    version = 'Python v' + sys.version.split()[0] + '\n'
+    response = '\n'.join([message, version])
+    return [response.encode()]
+```
 ---
 
 ## 📁 4. Upload the App Files
@@ -31,7 +48,6 @@ Under the "Software" section in cPanel, click **Setup Python App**.
 Upload the following to your app's **Application root directory** (e.g., `~/flask-example/`):
 
 - `app.py`
-- `passenger_wsgi.py`
 - `requirements.txt`
 - A `templates/` folder containing `contact.html`
 
