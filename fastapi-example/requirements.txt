@@ -1,2 +1,3 @@
 fastapi
 starlette
+a2wsgi
