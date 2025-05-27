@@ -9,6 +9,23 @@ app.secret_key = os.urandom(24)
 def home():
     return 'Hello, this is the home page!'
 
+@app.route("/add-handled", methods=["POST"])
+def add_handled():
+    x = request.form.get("x", "")
+    y = request.form.get("y", "")
+    try:
+        result = int(x) + int(y)
+        return render_template("add.html", result=result, error=None)
+    except ValueError:
+        return render_template("add.html", result=None, error="Please provide valid integers for both x and y.")
+
+@app.route("/add-unhandled", methods=["POST"])
+def add_unhandled():
+    x = request.form.get("x", "")
+    y = request.form.get("y", "")
+    result = int(x) + int(y)  # Will raise ValueError
+    return render_template("add.html", result=result, error=None)
+
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":

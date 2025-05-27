@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Numbers</title>
+</head>
+<body>
+    <h1>Add Two Numbers</h1>
+
+    {% if result is not none %}
+        <p><strong>Result:</strong> {{ result }}</p>
+    {% elif error %}
+        <p style="color: red;"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('add_handled') }}" method="post">
+        <input type="text" name="x" placeholder="Enter x">
+        <input type="text" name="y" placeholder="Enter y">
+        <button type="submit">Add (Handled)</button>
+    </form>
+
+    <form action="{{ url_for('add_unhandled') }}" method="post" style="margin-top: 10px;">
+        <input type="text" name="x" placeholder="Enter x">
+        <input type="text" name="y" placeholder="Enter y">
+        <button type="submit">Add (Unhandled)</button>
+    </form>
+</body>
+</html>
