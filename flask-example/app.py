@@ -1,15 +1,23 @@
-from flask import Flask, render_template, request, redirect, flash
 import os
+from string import ascii_letters as ALLOWED_CHARS
+from flask import Flask, render_template, request, redirect, flash
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
+def ping():
+    return 'Hello, this is the home page!'
+
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         email = request.form.get("email", "").strip()
         message = request.form.get("message", "").strip()
+        assert all(c in ALLOWED_CHARS for c in name)
+        assert all(c in ALLOWED_CHARS for c in email)
+        assert all(c in ALLOWED_CHARS for c in message)
 
         if not name or not email or not message:
             flash("All fields are required.", "error")
@@ -23,3 +31,9 @@ def contact():
         return redirect("/flask-example")
 
     return render_template("contact.html")
+
+@app.route("/ping")
+def ping():
+    return "pong"
+
+
