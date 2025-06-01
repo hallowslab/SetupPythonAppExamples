@@ -46,8 +46,5 @@ This is a minimal Django web application demonstrating:
    - Below "Configuration files" there is a field for files, add `requirements.txt`
    - Click Save and then click "pip install" (You might need to reload the page)
    - Collect static files in "Execute Python Script": `manage.py collectstatic`
-
-
-3. Run Django setup:
-    * `python manage.py migrate`
-    * `python manage.py createsuperuser`
+   - Run database migrations in "Execute Python Script": `manage.py migrate`
+   - Create a super user in "Execute Python Script": `manage.py createadmin`
