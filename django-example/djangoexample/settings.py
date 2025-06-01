@@ -154,7 +154,8 @@ def _load_env():
                 'USER': MYSQL_USER,
                 'NAME': MYSQL_DB,
                 'PASSWORD': MYSQL_PASSWORD,
-                'HOST': ("" if MYSQL_HOST==None else MYSQL_HOST)
+                'HOST': ("" if MYSQL_HOST==None else MYSQL_HOST),
+                'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'" ,"use_pure": True},
             }
         }
 
