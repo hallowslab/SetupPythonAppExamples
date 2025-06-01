@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 @app.route("/")
 def home():
-    return 'Hello, this is the home page!'
+    return render_template("home.html")
 
 @app.route("/add-handled", methods=["GET", "POST"])
 def add_handled():
