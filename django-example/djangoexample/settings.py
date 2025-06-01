@@ -35,7 +35,9 @@ if SECRET_KEY is None:
         raise ValueError("Secret key can't be loaded")
         sys.exit(1)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "test.hallows-tech-lab.pt"
+]
 
 
 # Application definition
