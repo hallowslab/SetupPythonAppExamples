@@ -26,7 +26,7 @@ TESTING = "test" in sys.argv
 DB_MIGRATION = "makemigrations" in sys.argv or "migrate" in sys.argv
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", None)
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", None)
 if SECRET_KEY is None and DEBUG or TESTING or DB_MIGRATION:
     print(f"""Loading insecure secret key because:
         Debug:{DEBUG},
@@ -128,6 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -142,7 +144,8 @@ def _load_env():
     MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", None)
     MYSQL_DB = os.environ.get("MYSQL_DB", None)
     if (MYSQL_USER is None or MYSQL_PASSWORD is None or MYSQL_DB is None):
-        sys.stdout.write(f"Missing environment variables\n User:{MYSQL_USER}\nPassword:{MYSQL_PASSWORD[:4]}\nDatabase:{MYSQL_DB}\n")
+        
+        sys.stdout.write(f"Missing environment variables\n User:{MYSQL_USER}\nPassword:Ommited for security\nDatabase:{MYSQL_DB}\n")
         return
     else:
         DATABASES = {
