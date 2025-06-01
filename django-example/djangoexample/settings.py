@@ -21,21 +21,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", False)
+DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() in ("1", "true", "yes")
 TESTING = "test" in sys.argv
 DB_MIGRATION = "makemigrations" in sys.argv or "migrate" in sys.argv
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", None)
-if SECRET_KEY is None and DEBUG or TESTING or DB_MIGRATION:
-    print(f"""Loading insecure secret key because:
-        Debug:{DEBUG},
-        Testing:{TESTING}
-        DB Migration:{DB_MIGRATION}""")
-    SECRET_KEY = "djang-insecure-FYV*R!st9vJ<LLcrTV4jCA*VTQVxD3RsS9"
-else:
-    raise ValueError("Secret key can't be loaded")
-    sys.exit(1)
+if SECRET_KEY is None:
+    if DEBUG or TESTING or DB_MIGRATION:
+        print("Using fallback insecure key for non-production context.")
+        SECRET_KEY = "fallback-insecure-key-?N4!iyeenK2AttfDwS7a"
+    else:
+        raise ValueError("Secret key can't be loaded")
+        sys.exit(1)
 
 ALLOWED_HOSTS = []
 
