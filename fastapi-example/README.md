@@ -9,6 +9,15 @@ This is a lightweight FastAPI project designed for shared hosting on **cPanel wi
 - `/`: Returns `{"message": f"FastAPI, version: {app.version}"}`
 - `/ping`: Returns `{ "message": "pong" }`
 - `/hello?name=YourName`: Returns personalized JSON response
+- `/add`: Calculates sum of values, handles unexpected values
+- `/unadd`: Same as above with no handling
+
+---
+
+## Example commands
+
+* `curl -X POST https://test.hallows-tech-lab.pt/fastapi-example/add -H "Content-Type: application/json" -d '{"x":2,"y":"potato"}'`: Handled value sum
+* `curl -X POST https://test.hallows-tech-lab.pt/fastapi-example/unadd -H "Content-Type: application/json" -d '{"x":2,"y":"potato"}`: Unhandled value sum
 
 ---
 
