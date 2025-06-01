@@ -58,10 +58,11 @@ def contact():
         message = request.form.get("message", "").strip()
         try:
             assert all(c in ALLOWED_CHARS for c in name)
-            assert all(c in ALLOWED_CHARS for c in email)
+            assert all(c in ALLOWED_CHARS+"@" for c in email)
             assert all(c in ALLOWED_CHARS for c in message)
         except AssertionError:
             flash("Invalid characters.", "error")
+            return redirect("/flask-example")
 
         if not name or not email or not message:
             flash("All fields are required.", "error")
