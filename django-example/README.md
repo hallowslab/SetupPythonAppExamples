@@ -13,12 +13,12 @@ This is a minimal Django web application demonstrating:
 
 ## Environment variables
 
-* DJANGO_ENV
+* DJANGO_DEBUG(Optional) 
 * DJANGO_SECRET_KEY
 * DJANGO_ADMIN_USERNAME
 * DJANGO_ADMIN_EMAIL
 * DJANGO_ADMIN_PASSWORD
-* MYSQL_HOST
+* MYSQL_HOST(Optional)
 * MYSQL_USER
 * MYSQL_PASSWORD
 * MYSQL_DB
@@ -39,29 +39,14 @@ This is a minimal Django web application demonstrating:
 1. **Create the Python App:**
    - Go to **Setup Python App**
    - Select Python version
-   - Set `Application startup file`: `djangoexample/wsgi.py`
+   - Set `Application startup file`: `djangoexample/wsgi.py` or custom `passenger_wsgi.py`
    - Set `Application Entry point`: `application`
    - Set the working directory (where `manage.py` is)
-   - Set environment variables (optional), in your app environment: `DJANGO_SETTINGS_MODULE=djangoexample.settings`
+   - Set [environment variables](#environment-variables)
+   - Below "Configuration files" there is a field for files, add `requirements.txt`
+   - Click Save and then click "pip install" (You might need to reload the page)
 
-2. **Install requirements:**
-   Use the terminal or cPanel UI:
-   - `pip install django mysqlclient`
 
 3. Run Django setup:
     * `python manage.py migrate`
     * `python manage.py createsuperuser`
-
-5. Configure database:
-    - Edit settings.py with your cPanel MySQL credentials:
-        ```DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.mysql',
-                'NAME': 'your_db_name',
-                'USER': 'your_db_user',
-                'PASSWORD': 'your_db_password',
-                'HOST': 'localhost',
-                'PORT': '3306',
-            }
-        }
-        ```

@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_ENV", False)
+DEBUG = os.environ.get("DJANGO_DEBUG", False)
 TESTING = "test" in sys.argv
 DB_MIGRATION = "makemigrations" in sys.argv or "migrate" in sys.argv
 
@@ -150,7 +150,7 @@ def _load_env():
     else:
         DATABASES = {
             'default': {
-                'ENGINE': 'django.db.backends.mysql',
+                'ENGINE': 'mysql.connector.django',
                 'USER': MYSQL_USER,
                 'NAME': MYSQL_DB,
                 'PASSWORD': MYSQL_PASSWORD,
