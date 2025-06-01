@@ -133,3 +133,26 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Load database configs from environment
+def _load_env():
+    global DATABASES
+    MYSQL_HOST = os.environ.get("MYSQL_HOST", None)
+    MYSQL_USER = os.environ.get("MYSQL_USER", None)
+    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", None)
+    MYSQL_DB = os.environ.get("MYSQL_DB", None)
+    if (MYSQL_USER is None or MYSQL_PASSWORD is None or MYSQL_DB is None):
+        sys.stdout.write(f"Missing environment variables\n User:{MYSQL_USER}\nPassword:{MYSQL_PASSWORD[:4]}\nDatabase:{MYSQL_DB}\n")
+        return
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'USER': MYSQL_USER,
+                'NAME': MYSQL_DB,
+                'PASSWORD': MYSQL_PASSWORD,
+                'HOST': ("" if MYSQL_HOST==None else MYSQL_HOST)
+            }
+        }
+
+_load_env()
