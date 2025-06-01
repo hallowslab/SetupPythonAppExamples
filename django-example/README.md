@@ -11,6 +11,18 @@ This is a minimal Django web application demonstrating:
 
 ---
 
+## Environment variables
+
+* MYSQL_HOST
+* MYSQL_USER
+* MYSQL_PASSWORD
+* MYSQL_DB
+* DJANGO_ADMIN_USERNAME
+* DJANGO_ADMIN_EMAIL
+* DJANGO_ADMIN_PASSWORD
+
+---
+
 ## 🚀 Features
 
 - WSGI-based Django app compatible with cPanel + CloudLinux Python Selector
