@@ -45,6 +45,7 @@ This is a minimal Django web application demonstrating:
    - Set [environment variables](#environment-variables)
    - Below "Configuration files" there is a field for files, add `requirements.txt`
    - Click Save and then click "pip install" (You might need to reload the page)
+   - Collect static files in "Execute Python Script": `manage.py collectstatic`
 
 
 3. Run Django setup:

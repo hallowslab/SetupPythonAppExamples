@@ -1,2 +1,2 @@
-django
+Django>=4.2.6,<4.3
 mysql-connector-python
