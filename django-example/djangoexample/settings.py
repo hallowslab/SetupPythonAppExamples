@@ -36,7 +36,9 @@ if SECRET_KEY is None:
         sys.exit(1)
 
 ALLOWED_HOSTS = [
-    "test.hallows-tech-lab.pt"
+    "test.hallows-tech-lab.pt",
+    "127.0.0.1",
+    "localhost"
 ]
 
 
